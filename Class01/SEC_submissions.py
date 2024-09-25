@@ -4,7 +4,7 @@ import os
 
 # Define the user-agent as required by the SEC API
 headers = {
-    "User-Agent": "your-email@example.com"
+    "User-Agent": "University of Washington abcurtis@uw.edu"
 }
 
 # Function to get filings for a company based on CIK and save it as a JSON file
@@ -43,4 +43,4 @@ if __name__ == "__main__":
     cik = "0000320193"  # CIKs are zero-padded, so leading zeros are important
     
     # Save the full filings data to a JSON file
-    get_and_save_company_filings(cik, filename="apple_filings.json") #Needs to be updated
+    get_and_save_company_filings(cik, filename="ACCTG522_Labs/Class01/apple_filings.json") #Needs to be updated
