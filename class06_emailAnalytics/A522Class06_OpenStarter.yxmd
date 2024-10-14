@@ -1,0 +1,1353 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2023.1">
+  <Nodes>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+        <Position x="56" y="54" width="996" height="96" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Text>Part 1: We will undertake our ETL steps in this section, in most cases we will use REGEX parsing tools to separate the data into meaningful variables</Text>
+          <Font name="Arial" size="11.25" style="0" />
+          <TextColor name="White" />
+          <FillColor r="64" g="0" b="128" />
+          <Shape shape="1" />
+          <Justification Justification="1" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+        <Position x="56" y="522" width="996" height="96" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Text>Part 2: We will undertake our analysis steps in this section, in most cases we will be using either REGEX parsing tools or regex matches to identify the possible cybersecurtiy related violations.</Text>
+          <Font name="Arial" size="11.25" style="0" />
+          <TextColor name="White" />
+          <FillColor r="64" g="0" b="128" />
+          <Shape shape="1" />
+          <Justification Justification="1" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="60">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="53" y="1109" width="158" height="24" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Tokenize Step</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="True" />
+          <Folded value="True" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="41">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="78" y="1158" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="emailFrom" selected="False" />
+                <SelectField field="emailTo" selected="False" />
+                <SelectField field="DateTime_Out" selected="False" />
+                <SelectField field="dayOfWeek" selected="False" />
+                <SelectField field="Month" selected="False" />
+                <SelectField field="Year" selected="False" />
+                <SelectField field="isReply" selected="False" />
+                <SelectField field="isForward" selected="False" />
+                <SelectField field="isInternal" selected="False" />
+                <SelectField field="month_year" selected="False" />
+                <SelectField field="dow" selected="False" />
+                <SelectField field="eom" selected="False" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="40">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RegEx.RegEx">
+            <Position x="175" y="1158" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>emailBody</Field>
+              <RegExExpression value="\&lt;\w+\&gt;" />
+              <CaseInsensitve value="True" />
+              <Method>ParseSimple</Method>
+              <Replace expression="">
+                <CopyUnmatched value="True" />
+              </Replace>
+              <ParseSimple>
+                <SplitToRows value="True" />
+              </ParseSimple>
+              <ParseComplex>
+                <Field field="No Marked Groups Found" type="No Marked Groups Found" size="No Marked Groups Found" />
+              </ParseComplex>
+              <Match>
+                <Field>MessageID_Matched</Field>
+                <ErrorUnmatched value="False" />
+              </Match>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRegEx" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="57">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="342" y="989" width="205" height="193" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Analysis: Q3</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="58">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RegEx.RegEx">
+            <Position x="367" y="1038" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>emailBody</Field>
+              <RegExExpression value=".*(\d{3}-\d{2}-\d{4}).*" />
+              <CaseInsensitve value="True" />
+              <Method>ParseComplex</Method>
+              <Replace expression="">
+                <CopyUnmatched value="True" />
+              </Replace>
+              <ParseSimple>
+                <SplitToRows value="False" />
+                <RootName>emailBody</RootName>
+                <NumFields value="3" />
+                <ErrorHandling>Warn</ErrorHandling>
+              </ParseSimple>
+              <ParseComplex>
+                <Field field="isSSN" type="V_String" size="10000" />
+              </ParseComplex>
+              <Match>
+                <Field>MessageID_Matched</Field>
+                <ErrorUnmatched value="False" />
+              </Match>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRegEx" />
+        </Node>
+        <Node ToolID="59">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="463" y="1038" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Mode>Simple</Mode>
+              <Simple>
+                <Operator>IsNotEmpty</Operator>
+                <Field>isSSN</Field>
+                <Operands>
+                  <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+                  <DateType>fixed</DateType>
+                  <PeriodDate>2021-11-02 16:02:19</PeriodDate>
+                  <PeriodType>
+                  </PeriodType>
+                  <PeriodCount>0</PeriodCount>
+                  <Operand>
+                  </Operand>
+                  <StartDate>2021-11-02 16:02:19</StartDate>
+                  <EndDate>2021-11-02 16:02:19</EndDate>
+                </Operands>
+              </Simple>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>!IsEmpty([isSSN])</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="61">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="367" y="1098" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Expression>REGEX_Match([emailBody], ".*\d{3}-\d{2}-\d{4}.*|.*\d{2}-\d{7}.*|.*9\d{2}-\d{2}-\d{4}.*")</Expression>
+              <Mode>Custom</Mode>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>REGEX_Match([emailBody], ".*\d{3}-\d{2}-\d{4}.*|.*\d{2}-\d{7}.*|.*9\d{2}-\d{2}-\...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="78" y="665" width="201" height="133" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Read Cleaned Dataset</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="50">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="103" y="714" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" FileFormat="19" SearchSubDirs="False" RecordLimit="">parsedEmailData.yxdb</File>
+              <FormatSpecificOptions />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>parsedEmailData.yxdb</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field description="RegEx: Parsed from emailHeader" name="MessageID" size="1009" source="RegEx: Parsed from emailHeader" type="V_String" />
+                <Field description="RegEx: Parsed from emailHeader" name="emailFrom" size="1009" source="RegEx: Parsed from emailHeader" type="V_String" />
+                <Field description="RegEx: Parsed from emailHeader" name="emailTo" size="1009" source="RegEx: Parsed from emailHeader" type="V_String" />
+                <Field name="DateTime_Out" source="DateTime: To dy., dd Mon. yyyy hh:mm:ss" type="DateTime" />
+                <Field description="RegEx: Parsed from emailDate" name="dayOfWeek" size="1009" source="RegEx: Parsed from emailDate" type="V_String" />
+                <Field description="RegEx: Parsed from emailDate" name="Month" size="1009" source="RegEx: Parsed from emailDate" type="V_String" />
+                <Field description="RegEx: Parsed from emailDate" name="Year" size="1009" source="RegEx: Parsed from emailDate" type="V_String" />
+                <Field name="isReply" source="Formula: REGEX_Match([emailBody], &quot;Subject:\sRE:.+?&quot;)" type="Bool" />
+                <Field name="isForward" source="Formula: REGEX_Match([emailBody], &quot;Subject:\sFW:.+?&quot;)" type="Bool" />
+                <Field name="isInternal" source="Formula: REGEX_Match([emailTo], &quot;.+?@enron.com&quot;)" type="Bool" />
+                <Field name="month_year" size="64" source="Formula: padleft(tostring(datetimemonth([DateTime_Out])),2,&quot;0&quot;)+&quot;-&quot;+[Year]" type="String" />
+                <Field name="dow" source="Formula: ToNumber(DateTimeFormat([DateTime_Out],&quot;%w&quot;))" type="Int16" />
+                <Field name="eom" size="64" source="Formula: DateTimeTrim([DateTime_Out],&quot;lastofmonth&quot;)" type="String" />
+                <Field description="RegEx: Parsed from EmailData" name="emailBody" size="10000" source="RegEx: Parsed from EmailData" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="39">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="318" y="1289" width="186" height="24" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Sentiment Analysis</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="True" />
+          <Folded value="True" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="42">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="547" y="1398" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="emailBody" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="Word" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Right_Sequence Number" selected="False" input="Right_" />
+                    <SelectField field="Right_Word Count" selected="False" input="Right_" />
+                    <SelectField field="Right_Word Proportion" selected="False" input="Right_" />
+                    <SelectField field="Right_Average Proportion" selected="False" input="Right_" />
+                    <SelectField field="Right_Std Dev" selected="False" input="Right_" />
+                    <SelectField field="Right_Doc Count" selected="False" input="Right_" />
+                    <SelectField field="Right_Uncertainty" selected="False" input="Right_" />
+                    <SelectField field="Right_Litigious" selected="False" input="Right_" />
+                    <SelectField field="Right_Constraining" selected="False" input="Right_" />
+                    <SelectField field="Right_Superfluous" selected="False" input="Right_" />
+                    <SelectField field="Right_Interesting" selected="False" input="Right_" />
+                    <SelectField field="Right_Modal" selected="False" input="Right_" />
+                    <SelectField field="Right_Irr_Verb" selected="False" input="Right_" />
+                    <SelectField field="Right_Harvard_IV" selected="False" input="Right_" />
+                    <SelectField field="Right_Syllables" selected="False" input="Right_" />
+                    <SelectField field="Right_Source" selected="False" input="Right_" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="44">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="619" y="1398" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="MessageID" action="GroupBy" rename="MessageID" />
+                <SummarizeField field="Negative" action="Sum" rename="Sum_Negative" />
+                <SummarizeField field="Positive" action="Sum" rename="Sum_Positive" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="46">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="691" y="1386" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="MessageID" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="MessageID" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Right_MessageID" selected="True" rename="Right_MessageID" input="Right_" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="47">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="775" y="1386" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="IF [Sum_Negative] = 0 and [sum_positive] = 0 &#xA;THEN 0 ELSE ([Sum_Positive]-[Sum_Negative])/([Sum_Negative]+[Sum_Positive]) ENDIF" field="sentiment" size="8" type="Double" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>sentiment = IF [Sum_Negative] = 0 and [sum_positive] = 0 
+THEN 0 ELSE ([Sum_Posi...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="48">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="871" y="1386" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="eom" action="GroupBy" rename="eom" />
+                <SummarizeField field="sentiment" action="Avg" rename="Avg_sentiment" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="53">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="343" y="1338" width="156" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Connect the select tool to the parsed emails file</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="37">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="54" y="1277" width="171" height="24" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Input Dictionary</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="True" />
+          <Folded value="True" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="45">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="163" y="1374" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="IF [Negative]=0 THEN 0 ELSE 1 ENDIF" field="Negative" size="8" type="Double" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText><![CDATA[Negative = IF [Negative]=0 THEN 0 ELSE 1 ENDIF
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="51">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="79" y="1374" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>LoughranMcDonald_MasterDictionary_2014.xlsx
+Query=`LoughranMcDonald_MasterDict...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Word" size="255" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="V_String" />
+                <Field name="Sequence Number" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Word Count" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Word Proportion" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Average Proportion" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Std Dev" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Doc Count" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Negative" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Positive" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Uncertainty" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Litigious" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Constraining" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Superfluous" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Interesting" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Modal" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Irr_Verb" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Harvard_IV" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Syllables" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="Double" />
+                <Field name="Source" size="255" source="File: U:\ACCTG522DataPack\Class08\LoughranMcDonald_MasterDictionary_2014.xlsx|||`LoughranMcDonald_MasterDictiona$`" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="52">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="79" y="1326" width="144" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Note the dictionary is in the AACCTG522 Class08 folder</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="330" y="665" width="723" height="301" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Undertake Analysis: Q2</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="18">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="356" y="748" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="MessageID" action="CountDistinct" rename="CountDistinct_MessageID" />
+                <SummarizeField field="dayOfWeek" action="GroupBy" rename="dayOfWeek" />
+                <SummarizeField field="dow" action="GroupBy" rename="dow" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="21">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="440" y="714" width="588" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Below are example tools that can be used to undertake the analysis -- this section will be updated significantly</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="35">
+          <GuiSettings Plugin="PlotlyCharting">
+            <Position x="475" y="750" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <ChartingFields>
+                <Traces json:Array="true" xmlns:json="http://james.newtonking.com/projects/json">
+                  <type>bar</type>
+                  <mode>markers</mode>
+                  <orientation>v</orientation>
+                  <xsrc>dow</xsrc>
+                  <ysrc>CountDistinct_MessageID</ysrc>
+                </Traces>
+                <Layout>
+                  <title>
+                    <text>
+                    </text>
+                  </title>
+                  <font>
+                    <family>sans-serif</family>
+                  </font>
+                  <autosize>false</autosize>
+                  <width>700</width>
+                  <height>849</height>
+                  <showlegend>true</showlegend>
+                  <hovermode>closest</hovermode>
+                  <xaxis>
+                    <range>-0.5</range>
+                    <range>6.5</range>
+                    <autorange>true</autorange>
+                    <title>
+                      <text>dday of the week</text>
+                    </title>
+                    <type>linear</type>
+                    <tickfont>
+                      <size>12</size>
+                    </tickfont>
+                    <nticks>0</nticks>
+                  </xaxis>
+                  <yaxis>
+                    <range>0</range>
+                    <range>6181.0526315789475</range>
+                    <autorange>true</autorange>
+                    <title>
+                      <text>CountDistinct_MessageID</text>
+                    </title>
+                    <type>linear</type>
+                  </yaxis>
+                  <legend>
+                    <font>
+                      <size>12</size>
+                    </font>
+                    <borderwidth>0</borderwidth>
+                  </legend>
+                </Layout>
+              </ChartingFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="PortfolioPluginsEngine.dll" EngineDllEntryPoint="ComposerInteractiveCharting" />
+        </Node>
+        <Node ToolID="49">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+            <Position x="571" y="750" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <TempFile>C:\Users\abcurtis\AppData\Local\Temp\Engine_26004_5b95e757d4cc464c8b61880c2dff680d_\Engine_20832_0267f1b2bca742f1a34a7c9973854c38_.yxdb</TempFile>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+        </Node>
+        <Node ToolID="54">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="355" y="822" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="month_year" action="GroupBy" rename="month_year" />
+                <SummarizeField field="eom" action="GroupBy" rename="eom" />
+                <SummarizeField field="MessageID" action="CountDistinct" rename="CountDistinct_MessageID" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="55">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="475" y="882" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="MessageID" action="CountDistinct" rename="CountDistinct_MessageID" />
+                <SummarizeField field="sentHour" action="GroupBy" rename="sentHour" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="56">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="355" y="882" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="DateTimeHour([DateTime_Out])&#xA;&#xA;" field="sentHour" size="64" type="String" />
+                <FormulaField expression="IF Length([sentHour])=1 THEN &quot;0&quot;+[sentHour] ELSE [sentHour] ENDIF" field="sentHour" size="64" type="String" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>sentHour = DateTimeHour([DateTime_Out])
+
+
+sentHour = IF Length([sentHour])=1 THE...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="378" y="185" width="661" height="241" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Parse Header information and emailBody</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="6">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RegEx.RegEx">
+            <Position x="403" y="282" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>EmailData</Field>
+              <RegExExpression value="(^.+?)\s(Subject:.+$)" />
+              <CaseInsensitve value="True" />
+              <Method>ParseComplex</Method>
+              <Replace expression="">
+                <CopyUnmatched value="True" />
+              </Replace>
+              <ParseSimple>
+                <SplitToRows value="False" />
+                <RootName>EmailData</RootName>
+                <NumFields value="3" />
+                <ErrorHandling>Warn</ErrorHandling>
+              </ParseSimple>
+              <ParseComplex>
+                <Field field="emailHeader" type="V_String" size="1009" />
+                <Field field="emailBody" type="V_String" size="10000" />
+              </ParseComplex>
+              <Match>
+                <Field>EmailData_Matched</Field>
+                <ErrorUnmatched value="False" />
+              </Match>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRegEx" />
+        </Node>
+        <Node ToolID="13">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="416" y="234" width="588" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Below are example tools that can be used to undertake the ETL process and check for accuracy in the parse -- this section will be updated significantly</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="23">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="499" y="342" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Mode>Simple</Mode>
+              <Simple>
+                <Operator>Contains</Operator>
+                <Field>emailHeader</Field>
+                <Operands>
+                  <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+                  <DateType>fixed</DateType>
+                  <PeriodDate>2021-10-28 15:56:52</PeriodDate>
+                  <PeriodType>
+                  </PeriodType>
+                  <PeriodCount>0</PeriodCount>
+                  <Operand>Subject:</Operand>
+                  <StartDate>2021-10-28 15:56:52</StartDate>
+                  <EndDate>2021-10-28 15:56:52</EndDate>
+                </Operands>
+              </Simple>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Contains([emailHeader],"Subject:")</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="24">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RegEx.RegEx">
+            <Position x="498" y="282" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>emailHeader</Field>
+              <RegExExpression value="Message-ID:\s&lt;(\d+\.\d+).+Date:\s(.+?)\sFrom:\s(.+?)\sTo:\s(.+$)" />
+              <CaseInsensitve value="True" />
+              <Method>ParseComplex</Method>
+              <Replace expression="">
+                <CopyUnmatched value="True" />
+              </Replace>
+              <ParseSimple>
+                <SplitToRows value="False" />
+                <RootName>emailHeader</RootName>
+                <NumFields value="3" />
+                <ErrorHandling>Warn</ErrorHandling>
+              </ParseSimple>
+              <ParseComplex>
+                <Field field="MessageID" type="V_String" size="1009" />
+                <Field field="emailDate" type="V_String" size="1009" />
+                <Field field="emailFrom" type="V_String" size="1009" />
+                <Field field="emailTo" type="V_String" size="1009" />
+              </ParseComplex>
+              <Match>
+                <Field>EmailData_Matched</Field>
+                <ErrorUnmatched value="False" />
+              </Match>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRegEx" />
+        </Node>
+        <Node ToolID="25">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DateTime.DateTime">
+            <Position x="583" y="282" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <IsFrom value="False" />
+              <InputFieldName>emailDate</InputFieldName>
+              <Language>English</Language>
+              <Format>dy., dd Mon. yyyy hh:mm:ss</Format>
+              <OutputFieldName>DateTime_Out</OutputFieldName>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Convert emailDate From:
+Custom</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDateTime" />
+        </Node>
+        <Node ToolID="26">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.RegEx.RegEx">
+            <Position x="679" y="282" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>emailDate</Field>
+              <RegExExpression value="(\w{3}),\s\d+\s(\w{3})\s(\d{4})" />
+              <CaseInsensitve value="True" />
+              <Method>ParseComplex</Method>
+              <Replace expression="">
+                <CopyUnmatched value="True" />
+              </Replace>
+              <ParseSimple>
+                <SplitToRows value="False" />
+                <RootName>emailDate</RootName>
+                <NumFields value="3" />
+                <ErrorHandling>Warn</ErrorHandling>
+              </ParseSimple>
+              <ParseComplex>
+                <Field field="dayOfWeek" type="V_String" size="1009" />
+                <Field field="Month" type="V_String" size="1009" />
+                <Field field="Year" type="V_String" size="1009" />
+              </ParseComplex>
+              <Match>
+                <Field>EmailData_Matched</Field>
+                <ErrorUnmatched value="False" />
+              </Match>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRegEx" />
+        </Node>
+        <Node ToolID="28">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="763" y="282" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="REGEX_Match([emailBody], &quot;Subject:\sRE:.+?&quot;)" field="isReply" size="1" type="Bool" />
+                <FormulaField expression="REGEX_Match([emailBody], &quot;Subject:\sFW:.+?&quot;)" field="isForward" size="1" type="Bool" />
+                <FormulaField expression="REGEX_Match([emailTo], &quot;.+?@enron.com&quot;)" field="isInternal" size="1" type="Bool" />
+                <FormulaField expression="padleft(tostring(datetimemonth([DateTime_Out])),2,&quot;0&quot;)+&quot;-&quot;+[Year]" field="month_year" size="64" type="String" />
+                <FormulaField expression="ToNumber(DateTimeFormat([DateTime_Out],&quot;%w&quot;))" field="dow" size="2" type="Int16" />
+                <FormulaField expression="DateTimeTrim([DateTime_Out],&quot;lastofmonth&quot;)" field="eom" size="64" type="String" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>isReply = REGEX_Match([emailBody], "Subject:\sRE:.+?")
+isForward = REGEX_Match([...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="29">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="955" y="282" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File FileFormat="19" MaxRecords="">parsedEmailData.yxdb</File>
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions>
+                <NoSpatialIndex>False</NoSpatialIndex>
+                <SaveSource>True</SaveSource>
+                <WriteCompatibleVersion>False</WriteCompatibleVersion>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>parsedEmailData.yxdb</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="30">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="859" y="282" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="EmailData" selected="False" />
+                <SelectField field="emailHeader" selected="False" />
+                <SelectField field="MessageID" selected="True" />
+                <SelectField field="emailDate" selected="False" />
+                <SelectField field="emailFrom" selected="True" />
+                <SelectField field="emailTo" selected="True" />
+                <SelectField field="DateTime_Out" selected="True" />
+                <SelectField field="dayOfWeek" selected="True" />
+                <SelectField field="Month" selected="True" />
+                <SelectField field="Year" selected="True" />
+                <SelectField field="isReply" selected="True" />
+                <SelectField field="isForward" selected="True" />
+                <SelectField field="isInternal" selected="True" />
+                <SelectField field="month_year" selected="True" />
+                <SelectField field="dow" selected="True" />
+                <SelectField field="eom" selected="True" />
+                <SelectField field="emailBody" selected="True" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="55" y="185" width="242" height="313" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Original Data Import</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="3">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+            <Position x="200" y="354" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <TempFile>C:\Users\abcurtis\AppData\Local\Temp\Engine_26004_5b95e757d4cc464c8b61880c2dff680d_\Engine_20832_18c713f882bf4f03bde189838adf2309_.yxdb</TempFile>
+              <TempFileDataProfiling />
+              <Layout>
+                <ViewMode>Single</ViewMode>
+                <ViewSize value="100" />
+                <View1>
+                  <DefaultTab>Profile</DefaultTab>
+                  <Hints>
+                    <Table />
+                  </Hints>
+                </View1>
+                <View2 />
+              </Layout>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+        </Node>
+        <Node ToolID="9">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="80" y="234" width="192" height="60" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Need to increase the width of the text field and use the browse tool to collect example email for testing at regex101.com</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="15">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+            <Position x="200" y="414" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <NumRows value="1" />
+              <Fields>
+                <Field name="EmailData" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>Message-ID: &lt;25828831.1075855376669.JavaMail.evans@thyme&gt; Date: Mon, 26 Nov 2001 07:25:16 -0800 (PST) From: k..allen@enron.com To: jsmith@austintx.com Subject: RE: Additional properties in San Antonio Jeff, Can you resend the info on the three properties you mailed and the one you faxed on Tuesday. I was out of the office last week. Phillip -----Original Message----- From: "JEFF SMITH" &lt;jsmith@austintx.com&gt;@ENRON Sent: Tuesday, November 20, 2001 3:43 PM To: Allen, Phillip K. Subject: Additional properties in San Antonio Phillip, I am waiting to get info. on two more properties in San Antonio. The broker will be faxing info. on Monday. One is 74 units for $1,900,000, and the other is 24 units for $550,000. Also, I have mailed you info. on three other properties in addition to the 100 unit property that I faxed this AM. Let me know if you have any questions. Jeff Smith The Smith Company 9400 Circle Drive Austin, TX 78736 512-394-0908 office 512-394-0913 fax 512-751-9728 mobile jsmith@austintx.com</c>
+                </r>
+              </Data>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+        </Node>
+        <Node ToolID="22">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="91" y="354" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">Analytics_mindset_case_studies_Cybersecurity_email_audit.csv</File>
+              <FormatSpecificOptions>
+                <HeaderRow>True</HeaderRow>
+                <IgnoreErrors>False</IgnoreErrors>
+                <AllowShareWrite>False</AllowShareWrite>
+                <ImportLine>1</ImportLine>
+                <FieldLen>10000</FieldLen>
+                <SingleThreadRead>False</SingleThreadRead>
+                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                <Delimeter>,</Delimeter>
+                <QuoteRecordBreak>False</QuoteRecordBreak>
+                <CodePage>28591</CodePage>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Analytics_mindset_case_studies_Cybersecurity_email_audit.csv</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="EmailData" size="10000" source="File: U:\__Archive\ACCTG520DataPack\Class09\Analytics_mindset_case_studies_Cybersecurity_email_audit.csv" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="41" Connection="Output" />
+      <Destination ToolID="40" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="40" Connection="Output" />
+      <Destination ToolID="42" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="45" Connection="Output" />
+      <Destination ToolID="42" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="58" Connection="Output" />
+      <Destination ToolID="59" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="41" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="46" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="44" Connection="Output" />
+      <Destination ToolID="46" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="54" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="56" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="58" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="61" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="42" Connection="Join" />
+      <Destination ToolID="44" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="46" Connection="Join" />
+      <Destination ToolID="47" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="47" Connection="Output" />
+      <Destination ToolID="48" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="51" Connection="Output" />
+      <Destination ToolID="45" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="35" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="35" Connection="Output" />
+      <Destination ToolID="49" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="56" Connection="Output" />
+      <Destination ToolID="55" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="23" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="24" Connection="Output" />
+      <Destination ToolID="25" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="25" Connection="Output" />
+      <Destination ToolID="26" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="26" Connection="Output" />
+      <Destination ToolID="28" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="28" Connection="Output" />
+      <Destination ToolID="30" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="30" Connection="Output" />
+      <Destination ToolID="29" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="22" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="22" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="False" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>A522Class06_OpenStarter</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="df310f89-1097-449d-a5d9-e45f7c83aa82" />
+      <Telemetry>
+        <PreviousWorkflowId value="aaf0878f-4ede-40b8-8355-91cc8cfaa8c6" />
+        <OriginWorkflowId value="88a01d89-2525-4edf-b97c-739e1d48e797" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
