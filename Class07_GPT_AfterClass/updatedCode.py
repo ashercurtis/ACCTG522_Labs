@@ -398,18 +398,20 @@ def generate_employee_id(current_id):
     num = int(current_id.split('-')[1]) + 1
     return f"PO-{num:06d}"
 
-# Function to generate a random hire date within a date range
 def generate_hire_date(start_range, end_range, last_hire_date):
     start_date = datetime.strptime(start_range, "%Y-%m-%d")
     end_date = datetime.strptime(end_range, "%Y-%m-%d")
-    hire_date = start_date
-    
-    while hire_date <= end_date:
-        hire_date += timedelta(days=random.randint(0, (end_date - hire_date).days))
+    max_attempts = 100  # Limit to avoid infinite loop
+    attempts = 0
+
+    while attempts < max_attempts:
+        hire_date = start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
         if not is_holiday_or_weekend(hire_date):
-            break
+            return hire_date.strftime('%d/%m/%Y')
+        attempts += 1
     
-    return hire_date.strftime('%d/%m/%Y')
+    # Fallback to the start date if no valid date found
+    return start_date.strftime('%d/%m/%Y')
 
 # Main function to generate employee data based on the startup hiring phases
 def generate_startup_employees(start_up_hires, start_hire_date, initial_employee_id):
