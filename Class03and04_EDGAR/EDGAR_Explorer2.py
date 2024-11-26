@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 
 # Set the CIK for Tesla and format it to be 10-digits long
-cik = "1318605"
+cik = "1108524"
 cik10 = f"{cik:0>10}"  # Format to 10 digits
 
 # Set the URL for Tesla's filings using the SEC's EDGAR API
@@ -64,10 +64,10 @@ data3 = pd.DataFrame(data['filings']['recent']['form'], columns=['form'])
 all10ks = alldata[alldata['form'] == '10-K']
 
 # Output the filtered 10-K filings to a CSV file
-all10ks.to_csv('tesla_10k_filings.csv', index=False)
+all10ks.to_csv('CKM_10k_filings.csv', index=False)
 
 # Confirm the file was created by printing a success message
-print("10-K filings have been saved to 'tesla_10k_filings.csv'.")
+print("10-K filings have been saved to 'CKM_10k_filings.csv'.")
 
 # Identify the most recent filing, including its form, filing date, and timestamp
 print(data2['form'][0])  # Most recent form

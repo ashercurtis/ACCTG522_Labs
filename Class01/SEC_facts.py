@@ -12,6 +12,11 @@ def get_facts(cik):
     res = requests.get(url=url,headers=headers)
     j = json.loads(res.text)
 
+    # Save the JSON output to a file
+    json_filename = f'CIK{cik}.json'
+    with open(json_filename, 'w') as json_file:
+        json.dump(j, json_file, indent=2)
+        
     # use this to look at the structure of a single record
     # open('out/tsla.json', 'w').write(json.dumps(result,indent=2))
 
@@ -46,7 +51,7 @@ def get_facts(cik):
     return df
 
 # use a list of ciks or parse list from file
-ciks = ['1318605','320193']
+ciks = ['1108524']
 
 l = []
 
@@ -58,4 +63,4 @@ for k,i in enumerate(ciks):
 # delete "join='inner'" for outer join concatenation (default), which gives all xbrl accounts listed
 df = pd.concat(l,join='inner',ignore_index=True)
 df.sort_values(by=['cik','frame'],inplace=True)
-df.to_csv('ACCTG522_Labs/Class01/appl_tsla.csv', index=False)
+df.to_csv('ACCTG522_Labs/Class01/CKM.csv', index=False)
